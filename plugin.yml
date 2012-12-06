@@ -1,0 +1,29 @@
+name: DDChestRegen
+main: com.modcrafting.ddchestregen.DDChestRegen
+version: 0.1
+website: http://modcrafting.com
+authors: [Deathmarine]
+description: >
+             Chest Regeneration Plugin.
+commands:
+    ddchest:
+        description: Allows user to set a chest.
+        usage: /<command> <add/remove>
+        permission: ddchestregen.command
+permissions:
+    ddchestregen.command:
+        description: Allows full control.
+        default: op
+        children:
+            ddchestregen.command: true
+            ddchestregen.open: true
+            ddchestregen.break: true
+    ddchestregen.command:
+        description: Allows the use of the command.
+    ddchestregen.open:
+        description: Allows users to open a regen chest.
+    ddchestregen.reopen:    
+        description: Allows users to reopen a regen chest.
+        default: false
+    diablodrops.break:
+        description: Allows users to break a regen chest.
