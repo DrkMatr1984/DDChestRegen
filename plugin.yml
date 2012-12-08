@@ -1,9 +1,10 @@
 name: DDChestRegen
 main: com.modcrafting.ddchestregen.DDChestRegen
-version: 0.1
+version: 0.2
 website: http://modcrafting.com
 authors: [Deathmarine]
 depend: [DiabloDrops]
+loadbefore: [DiabloDungeonBridge]
 description: >
              Chest Regeneration Plugin.
 commands:
