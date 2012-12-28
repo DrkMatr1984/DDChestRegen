@@ -16,7 +16,8 @@ public class DDChestCommand implements CommandExecutor{
 		this.plugin=plugin;
 	}
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public boolean onCommand(CommandSender sender, Command command,
             String commandLabel, String[] args)
     {

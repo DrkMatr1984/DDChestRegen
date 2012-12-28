@@ -30,6 +30,7 @@ public class DDChestListener implements Listener {
 	 * ddchestregen.open
 	 * @param event
 	 */
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onChestOpen(final PlayerInteractEvent event){
 		if(event.getAction()==Action.RIGHT_CLICK_BLOCK){
@@ -50,7 +51,7 @@ public class DDChestListener implements Listener {
 					if(blck.getState() instanceof Chest){
 						Chest chest = (Chest) blck.getState();
 						chest.getBlockInventory().clear();
-						plugin.dd.dropsAPI.fillChest(blck);
+						plugin.dd.getDropAPI().fillChest(blck);
 						plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, new Runnable(){
 							@Override
 							public void run() {
@@ -84,6 +85,7 @@ public class DDChestListener implements Listener {
 	 * ddchestregen.break
 	 * @param event
 	 */
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onBlockBreak(final BlockBreakEvent event){
 		final Block blck = event.getBlock();
