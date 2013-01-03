@@ -19,6 +19,7 @@ public class DDChestRegen extends JavaPlugin{
 			return;
 		}
 		this.getDataFolder().mkdir();
+		this.saveDefaultConfig();
 		db = new Database(this);
 		db.load();
 		this.getServer().getPluginManager().registerEvents(new DDChestListener(this), this);

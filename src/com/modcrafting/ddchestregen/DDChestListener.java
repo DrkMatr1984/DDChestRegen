@@ -30,7 +30,6 @@ public class DDChestListener implements Listener {
 	 * ddchestregen.open
 	 * @param event
 	 */
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onChestOpen(final PlayerInteractEvent event){
 		if(event.getAction()==Action.RIGHT_CLICK_BLOCK){
@@ -51,8 +50,17 @@ public class DDChestListener implements Listener {
 					if(blck.getState() instanceof Chest){
 						Chest chest = (Chest) blck.getState();
 						chest.getBlockInventory().clear();
-						plugin.dd.getDropAPI().fillChest(blck);
-						plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, new Runnable(){
+						if(plugin.getConfig().getBoolean("CustomItemsOnly",false)){
+							for(int i=0;i<plugin.getConfig().getInt("CustomItemsRandAmt",3);i++){
+								chest.getBlockInventory().addItem(plugin.getDiabloDrops().custom.get(plugin
+								.getDiabloDrops()
+								.getSingleRandom()
+								.nextInt(plugin.getDiabloDrops().custom.size())));
+							}
+						}else{
+							plugin.dd.getDropAPI().fillChest(blck);
+						}
+						plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable(){
 							@Override
 							public void run() {
 								plugin.db.add(blck.getLocation(), event.getPlayer().getName());
@@ -85,7 +93,6 @@ public class DDChestListener implements Listener {
 	 * ddchestregen.break
 	 * @param event
 	 */
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onBlockBreak(final BlockBreakEvent event){
 		final Block blck = event.getBlock();
@@ -95,7 +102,7 @@ public class DDChestListener implements Listener {
 					Chest chest = (Chest) blck.getState();
 					chest.getBlockInventory().clear();
 					plugin.blocks.remove(blck);
-					plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, new Runnable(){
+					plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable(){
 						@Override
 						public void run() {
 							plugin.db.remove(blck.getLocation());
