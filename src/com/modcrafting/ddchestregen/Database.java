@@ -128,6 +128,23 @@ public class Database {
 			plugin.getLogger().log(Level.SEVERE, "Unable to retreive connection", ex);
 		}		
 	}
+	public void remove(Location loc,String playername){
+		Connection conn;
+		PreparedStatement ps;
+		try {
+			conn = getSQLConnection();
+			ps = conn.prepareStatement("DELETE FROM chests WHERE x = ? AND y = ? AND z = ? AND world = ? AND player=?");
+			ps.setInt(1, (int) loc.getX());
+			ps.setInt(2, (int) loc.getY());
+			ps.setInt(3, (int) loc.getZ());
+			ps.setString(4, loc.getWorld().getName());
+			ps.setString(5, playername);
+			ps.executeUpdate();
+			close(conn,ps,null);
+		} catch (SQLException ex) {
+			plugin.getLogger().log(Level.SEVERE, "Unable to retreive connection", ex);
+		}		
+	}
 	public void close(Connection conn,PreparedStatement ps,ResultSet rs){
 		try {
 			if (ps != null)
