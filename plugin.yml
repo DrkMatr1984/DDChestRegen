@@ -1,6 +1,6 @@
 name: DDChestRegen
 main: com.modcrafting.ddchestregen.DDChestRegen
-version: 0.2
+version: 0.3
 website: http://modcrafting.com
 authors: [Deathmarine]
 depend: [DiabloDrops]
